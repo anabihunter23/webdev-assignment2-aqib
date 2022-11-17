@@ -1,24 +1,19 @@
 import { useState } from "react";
 import Card from "./Card";
-//when images were in src folder
-//import Leia from "./assets/Leia.jpg";
-//import Mj from "./assets/Mj.jpg";
-//import Rick from "./assets/Rick.jpg";
-//import Vegeta from "./assets/Vegeta.jpg";
 
 function Cards() {
   const [previousCard, setPreviousCard] = useState(-1);
   const [cards, setCards] = useState(
     [
       //4 unique cards, with 2 duplicates each
-      { id: 1, img: "/img/Leia.jpg", status: "" },
-      { id: 1, img: "/img/Leia.jpg", status: "" },
-      { id: 2, img: "/img/Mj.jpg", status: "" },
-      { id: 2, img: "/img/Mj.jpg", status: "" },
-      { id: 3, img: "/img/Rick.jpg", status: "" },
-      { id: 4, img: "/img/Rick.jpg", status: "" },
-      { id: 4, img: "/img/Vegeta.jpg", status: "" },
-      { id: 4, img: "/img/Vegeta.jpg", status: "" },
+      { id: 1, img: "/img/Leia.png", status: "" },
+      { id: 1, img: "/img/Leia.png", status: "" },
+      { id: 2, img: "/img/Mj.png", status: "" },
+      { id: 2, img: "/img/Mj.png", status: "" },
+      { id: 3, img: "/img/Rick.png", status: "" },
+      { id: 3, img: "/img/Rick.png", status: "" },
+      { id: 4, img: "/img/Vegeta.png", status: "" },
+      { id: 4, img: "/img/Vegeta.png", status: "" },
     ].sort(() => Math.random() - 0.5) //shuffles the array of cardsZ
   );
 

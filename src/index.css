@@ -43,8 +43,8 @@ h1{
 }
 
 .card img{
-  max-width: 70%;
-  max-height: 70%;
+  max-width: 90%;
+  max-height: 90%;
   transform: scale(0);
   transition: transform .5s;
 }
