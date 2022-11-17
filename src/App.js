@@ -7,6 +7,11 @@ function App() {
   return (
     <div className="App">
       <h1>Fortnite Memory Game</h1>
+      <p>
+        <button onClick={() => window.location.reload(false)}>
+          Start a New Game
+        </button>
+      </p>
       <Cards />
     </div>
   );
