@@ -69,12 +69,16 @@ function Cards() {
       cards[previousCard].disabled = "true";
       setCards([...cards]);
       setPreviousCard(-1);
-      //if all 4 card ids are matched, then you win
+      //if all card ids have "correct" status, meaning a match, then you win
       if (
+        cards[0].status === "correct" &&
         cards[1].status === "correct" &&
         cards[2].status === "correct" &&
         cards[3].status === "correct" &&
-        cards[4].status === "correct"
+        cards[4].status === "correct" &&
+        cards[5].status === "correct" &&
+        cards[6].status === "correct" &&
+        cards[7].status === "correct"
       ) {
         alert("Congratulations, you won the game");
       }
@@ -82,14 +86,51 @@ function Cards() {
       //cards arent a match
       cards[currentCard].status = "incorrect";
       cards[previousCard].status = "incorrect";
+      //disable all cards temporarily (until timeout is over)
+      cards[0].disabled = "true";
+      cards[1].disabled = "true";
+      cards[2].disabled = "true";
+      cards[3].disabled = "true";
+      cards[4].disabled = "true";
+      cards[5].disabled = "true";
+      cards[6].disabled = "true";
+      cards[7].disabled = "true";
       setCards([...cards]);
-      //after 1 second, the selected cards are reset
+
       setTimeout(() => {
+        //the status of the two selected cards is reset
         cards[currentCard].status = "";
         cards[previousCard].status = "";
+        //all remaining cards are no longer disabled
+        //theres probably a better way to do this and my code above, by looping
+        //through the array, but this is how i got it done
+        if (cards[0].status === "") {
+          cards[0].disabled = "false";
+        }
+        if (cards[1].status === "") {
+          cards[1].disabled = "false";
+        }
+        if (cards[2].status === "") {
+          cards[2].disabled = "false";
+        }
+        if (cards[3].status === "") {
+          cards[3].disabled = "false";
+        }
+        if (cards[4].status === "") {
+          cards[4].disabled = "false";
+        }
+        if (cards[5].status === "") {
+          cards[5].disabled = "false";
+        }
+        if (cards[6].status === "") {
+          cards[6].disabled = "false";
+        }
+        if (cards[7].status === "") {
+          cards[7].disabled = "false";
+        }
         setCards([...cards]);
         setPreviousCard(-1);
-      }, 500);
+      }, 1000);
     }
   }
 
