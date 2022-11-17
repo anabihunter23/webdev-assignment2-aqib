@@ -3,7 +3,7 @@ function Card(card, id, handleClick) {
 
   return (
     <div className={"card" + cardStatus} onClick={() => handleClick(id)}>
-      <img src={card.img} alt="Not loading" />
+      {card.img}
     </div>
   );
 }
