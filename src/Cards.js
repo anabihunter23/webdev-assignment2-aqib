@@ -6,28 +6,70 @@ function Cards() {
   const [cards, setCards] = useState(
     [
       //4 unique cards, with 2 duplicates each
-      { id: 1, sameCardCheck: 1, img: "/img/Leia.png", status: "" },
-      { id: 1, sameCardCheck: 2, img: "/img/Leia.png", status: "" },
-      { id: 2, sameCardCheck: 1, img: "/img/Mj.png", status: "" },
-      { id: 2, sameCardCheck: 2, img: "/img/Mj.png", status: "" },
-      { id: 3, sameCardCheck: 1, img: "/img/Rick.png", status: "" },
-      { id: 3, sameCardCheck: 2, img: "/img/Rick.png", status: "" },
-      { id: 4, sameCardCheck: 1, img: "/img/Vegeta.png", status: "" },
-      { id: 4, sameCardCheck: 2, img: "/img/Vegeta.png", status: "" },
+      {
+        id: 1,
+        img: "/img/Leia.png",
+        status: "",
+        disabled: false,
+      },
+      {
+        id: 1,
+        img: "/img/Leia.png",
+        status: "",
+        disabled: false,
+      },
+      {
+        id: 2,
+        img: "/img/Mj.png",
+        status: "",
+        disabled: false,
+      },
+      {
+        id: 2,
+        img: "/img/Mj.png",
+        status: "",
+        disabled: false,
+      },
+      {
+        id: 3,
+        img: "/img/Rick.png",
+        status: "",
+        disabled: false,
+      },
+      {
+        id: 3,
+        img: "/img/Rick.png",
+        status: "",
+        disabled: false,
+      },
+      {
+        id: 4,
+        img: "/img/Vegeta.png",
+        status: "",
+        disabled: false,
+      },
+      {
+        id: 4,
+        img: "/img/Vegeta.png",
+        status: "",
+        disabled: false,
+      },
     ].sort(() => Math.random() - 0.5) //shuffles the array of cardsZ
   );
 
   function checkCards(currentCard) {
     if (
-      cards[currentCard].id === cards[previousCard].id &&
-      cards[currentCard].sameCardCheck !== cards[previousCard].sameCardCheck
+      //checks for matched cards
+      cards[currentCard].id === cards[previousCard].id
     ) {
-      //cards are a match
+      //if the cards match, their status gets changed and they also get disabled
       cards[currentCard].status = "correct";
       cards[previousCard].status = "correct";
+      cards[currentCard].disabled = "true";
+      cards[previousCard].disabled = "true";
       setCards([...cards]);
       setPreviousCard(-1);
-      //if all the card ids are matched, then you win
+      //if all 4 card ids are matched, then you win
       if (
         cards[1].status === "correct" &&
         cards[2].status === "correct" &&
@@ -52,14 +94,22 @@ function Cards() {
   }
 
   function handleClick(id) {
-    if (previousCard === -1) {
-      cards[id].status = "active";
-      setCards([...cards]);
-      setPreviousCard(id); //previous card gets set to clicked card
-    } else {
-      //some card has already been clicked
-      //so we have to check if the card are the same
-      checkCards(id);
+    //if the card is disabled (ex.selected, or matched) do nothing
+    if (cards[id].disabled === "true") {
+      return;
+    }
+    //otherwise we set the current card to active and disable it temporarily
+    else {
+      if (previousCard === -1) {
+        cards[id].status = "active";
+        cards[id].disabled = "true";
+        setCards([...cards]);
+        setPreviousCard(id); //previous card gets set to clicked card
+      } else {
+        //some card has already been clicked
+        //so we have to check if the card are the same
+        checkCards(id);
+      }
     }
   }
 
