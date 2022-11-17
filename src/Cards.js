@@ -24,6 +24,15 @@ function Cards() {
       cards[previousCard].status = "correct";
       setCards([...cards]);
       setPreviousCard(-1);
+      //if all the card ids are matched, then you win
+      if (
+        cards[1].status === "correct" &&
+        cards[2].status === "correct" &&
+        cards[3].status === "correct" &&
+        cards[4].status === "correct"
+      ) {
+        alert("Congratulations, you won the game");
+      }
     } else {
       //cards arent a match
       cards[currentCard].status = "incorrect";
