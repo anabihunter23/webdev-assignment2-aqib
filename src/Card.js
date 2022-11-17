@@ -1,7 +1,7 @@
 function Card(item) {
   return (
     <div className="card">
-      <img src={item.img} alt="" />
+      <img src={item.img} alt="Image not loading" />
     </div>
   );
 }
