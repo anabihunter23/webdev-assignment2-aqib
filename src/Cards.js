@@ -1,69 +1,35 @@
 import { useState } from "react";
 import Card from "./Card";
+import Leia from "./assets/Leia.jpg";
+import Mj from "./assets/Mj.jpg";
+import Rick from "./assets/Rick.jpg";
+import Vegeta from "./assets/Vegeta.jpg";
 
 function Cards() {
-  const [items, setItems] = useState([
-    //4 unique items, with 2 duplicates since each item needs to match with another
-    { id: 1, img: "/assets/leia.jpg", status: "" },
-    { id: 1, img: "/assets/leia.jpg", status: "" },
-    { id: 2, img: "/assets/mj.jpg", status: "" },
-    { id: 2, img: "/assets/mj.jpg", status: "" },
-    { id: 3, img: "/assets/rick.jpg", status: "" },
-    { id: 4, img: "/assets/rick.jpg", status: "" },
-    { id: 4, img: "/assets/vegeta.jpg", status: "" },
-    { id: 4, img: "/assets/vegeta.jpg", status: "" },
-  ]);
+  const [prevItem, setPrevItem] = useState(-1);
+  const [items, setItems] = useState(
+    [
+      //4 unique items, with 2 duplicates since each item needs to match with another
+      { id: 1, img: Leia, status: "" },
+      { id: 1, img: Leia, status: "" },
+      { id: 2, img: Mj, status: "" },
+      { id: 2, img: Mj, status: "" },
+      { id: 3, img: Rick, status: "" },
+      { id: 4, img: Rick, status: "" },
+      { id: 4, img: Vegeta, status: "" },
+      { id: 4, img: Vegeta, status: "" },
+    ].sort(() => Math.random() - 0.5) //shuffles the array
+  );
+
+  function handleClick(id) {}
+
   return (
     <div className="container">
-      {items.map((item) => (
-        //individual cards will be mapped through Card.js
-        <Card />
+      {items.map((item, index) => (
+        <Card key={index} item={item} handleClick={handleClick} id={index} />
       ))}
     </div>
   );
 }
-
-// class example code
-// class Card extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { isFlipped: false };
-//   }
-
-//   handleClick = () => {
-//     this.setState((state) => ({ isFlipped: !state.isFlipped }));
-//   };
-
-//   render() {
-//     if (this.state.isFlipped === false) {
-//       return (
-//         <div
-//           style={{
-//             height: "100px",
-//             width: "75px",
-//             backgroundColor: "black",
-//             borderStyle: "solid",
-//             borderColor: "white",
-//           }}
-//           onClick={this.handleClick}
-//         ></div>
-//       );
-//     }
-//     return (
-//       <div
-//         style={{
-//           height: "100px",
-//           width: "75px",
-//           backgroundColor: "white",
-//           borderStyle: "solid",
-//           borderColor: "black",
-//         }}
-//         onClick={this.handleClick}
-//       >
-//         {this.props.cardText}
-//       </div>
-//     );
-//   }
-// }
 
 export default Cards;
