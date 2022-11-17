@@ -6,10 +6,10 @@ import Rick from "./assets/Rick.jpg";
 import Vegeta from "./assets/Vegeta.jpg";
 
 function Cards() {
-  const [prevItem, setPrevItem] = useState(-1);
-  const [items, setItems] = useState(
+  const [previousCard, setPreviousCard] = useState(-1);
+  const [cards, setCards] = useState(
     [
-      //4 unique items, with 2 duplicates since each item needs to match with another
+      //4 unique cards, with 2 duplicates each
       { id: 1, img: Leia, status: "" },
       { id: 1, img: Leia, status: "" },
       { id: 2, img: Mj, status: "" },
@@ -21,12 +21,43 @@ function Cards() {
     ].sort(() => Math.random() - 0.5) //shuffles the array
   );
 
-  function handleClick(id) {}
+  function checkCards(currentCard) {
+    if (cards[currentCard].id == cards[previousCard].id) {
+      //cards are a match
+      cards[currentCard].status = "correct";
+      cards[previousCard].status = "correct";
+      setCards([...cards]);
+      setPreviousCard(-1);
+    } else {
+      //cards arent a match
+      cards[currentCard].status = "incorrect";
+      cards[previousCard].status = "incorrect";
+      setCards([...cards]);
+      setTimeout(() => {
+        cards[currentCard].status = "";
+        cards[previousCard].status = "";
+        setCards([...cards]);
+        setPreviousCard(-1);
+      }, 1000);
+    }
+  }
+
+  function handleClick(id) {
+    if (previousCard === -1) {
+      cards[id].status = "active";
+      setCards([...cards]);
+      setPreviousCard(id); //previous card gets set to clicked card
+    } else {
+      //some card has already been clicked
+      //so we have to check if the card are the same
+      checkCards(id);
+    }
+  }
 
   return (
     <div className="container">
-      {items.map((item, index) => (
-        <Card key={index} item={item} handleClick={handleClick} id={index} />
+      {cards.map((card, index) => (
+        <Card key={index} card={card} handleClick={handleClick} id={index} />
       ))}
     </div>
   );
